@@ -13,7 +13,7 @@ radius = 35.0143
 radius = 435.259
 
 [node name="Drone" type="CharacterBody2D"]
-position = Vector2(58, -169)
+position = Vector2(-1, -1)
 collision_layer = 137
 collision_mask = 14
 script = ExtResource("1_db7h2")
@@ -27,7 +27,6 @@ texture = ExtResource("1_xm08u")
 shape = SubResource("CircleShape2D_062pu")
 
 [node name="Detection" type="Area2D" parent="."]
-visible = false
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
@@ -43,6 +42,7 @@ value = 100.0
 texture_under = ExtResource("3_hl01g")
 texture_over = ExtResource("4_fxaoh")
 texture_progress = ExtResource("5_ladjn")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
 [connection signal="body_exited" from="Detection" to="." method="_on_detection_body_exited"]

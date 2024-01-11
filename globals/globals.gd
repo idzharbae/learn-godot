@@ -1,5 +1,6 @@
 extends Node
 
+
 var max_laser_amount = 30
 signal laser_updated
 var laser_amount = 30:
@@ -26,3 +27,5 @@ var player_hp: int = 50:
 	set(value):
 		player_hp = max(0, min(value, player_max_hp))
 		player_hp_updated.emit()
+		if player_hp <= 0:
+			get_tree().change_scene_to_file("res://scenes/ui/gameover.tscn")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dp0ylgvpthfgq"]
+[gd_scene load_steps=4 format=3 uid="uid://dp0ylgvpthfgq"]
 
 [ext_resource type="PackedScene" uid="uid://crda82nse6eqb" path="res://scenes/levels/master/outside_level.tscn" id="1_2cmvb"]
 [ext_resource type="PackedScene" uid="uid://cgh8w7euvb7r6" path="res://scenes/doodads/crate.tscn" id="2_uwnin"]
+[ext_resource type="PackedScene" uid="uid://duprfc01fn874" path="res://scenes/enemies/bug.tscn" id="3_h2f0w"]
 
 [node name="Level1" instance=ExtResource("1_2cmvb")]
 
@@ -15,3 +16,6 @@ rotation = -1.04183
 [node name="Crate3" parent="." index="9" instance=ExtResource("2_uwnin")]
 position = Vector2(830, 966)
 rotation = 1.79071
+
+[node name="Bug" parent="." index="11" instance=ExtResource("3_h2f0w")]
+position = Vector2(1071, 969)
