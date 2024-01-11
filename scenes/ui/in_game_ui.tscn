@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=3 uid="uid://ctybs2bgti608"]
+
+[ext_resource type="Script" path="res://scenes/ui/in_game_ui.gd" id="1_pu5v0"]
+[ext_resource type="Texture2D" uid="uid://bdbkeylvngay5" path="res://graphics/ui/bullet.png" id="1_t3vr0"]
+[ext_resource type="FontFile" uid="uid://dcp6o2sam04fe" path="res://graphics/ui/subatomic.tsoonami.ttf" id="2_aaufb"]
+[ext_resource type="Texture2D" uid="uid://b3geog6c1gw3w" path="res://graphics/ui/grenade.png" id="2_dvw2y"]
+[ext_resource type="Texture2D" uid="uid://8h425byogjn3" path="res://graphics/ui/progress_bar/bg.png" id="4_uakd2"]
+[ext_resource type="Texture2D" uid="uid://3rck3pmeqe1v" path="res://graphics/ui/progress_bar/over.png" id="5_41ui2"]
+[ext_resource type="Texture2D" uid="uid://cndydy1hgekb3" path="res://graphics/ui/progress_bar/progress.png" id="6_1rbnk"]
+
+[sub_resource type="Theme" id="Theme_l2pk7"]
+default_font = ExtResource("2_aaufb")
+
+[sub_resource type="Theme" id="Theme_fbe8y"]
+default_font = ExtResource("2_aaufb")
+
+[node name="InGameUI" type="CanvasLayer"]
+script = ExtResource("1_pu5v0")
+
+[node name="AmmoCounter" type="Control" parent="."]
+layout_mode = 3
+anchor_top = 0.94
+anchor_right = 0.08
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="HboxContainer" type="HBoxContainer" parent="AmmoCounter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image" type="TextureRect" parent="AmmoCounter/HboxContainer"]
+layout_mode = 2
+texture = ExtResource("1_t3vr0")
+expand_mode = 2
+
+[node name="Count" type="Label" parent="AmmoCounter/HboxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_l2pk7")
+text = "22"
+horizontal_alignment = 1
+
+[node name="GrenadeCounter" type="Control" parent="."]
+layout_mode = 3
+anchor_top = 0.87
+anchor_right = 0.08
+anchor_bottom = 0.93
+grow_vertical = 0
+
+[node name="HboxContainer" type="HBoxContainer" parent="GrenadeCounter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image" type="TextureRect" parent="GrenadeCounter/HboxContainer"]
+layout_mode = 2
+texture = ExtResource("2_dvw2y")
+expand_mode = 2
+
+[node name="Count" type="Label" parent="GrenadeCounter/HboxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_fbe8y")
+text = "6"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -40.0
+offset_right = 150.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 15
+
+[node name="HealthBar" type="TextureProgressBar" parent="MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 0
+value = 33.0
+texture_under = ExtResource("4_uakd2")
+texture_over = ExtResource("5_41ui2")
+texture_progress = ExtResource("6_1rbnk")

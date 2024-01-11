@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cngn3n2omqgus"]
+
+[ext_resource type="Texture2D" uid="uid://8yyxx404wdkp" path="res://graphics/objects/wall_lamp.png" id="1_vokrn"]
+[ext_resource type="Texture2D" uid="uid://dcnujspjtr7yl" path="res://graphics/lights/textures/circle_scaled.png" id="2_68l47"]
+
+[node name="WallLamp" type="StaticBody2D"]
+z_index = 4
+collision_layer = 4
+collision_mask = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(157, 23)
+scale = Vector2(0.30499, 0.290316)
+texture = ExtResource("1_vokrn")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(125, -5, 119, -1, -117, -2, -126, -19, -107, -38, -86, -46, 90, -46, 107, -41, 129, -19)
+
+[node name="DirectionalLight2D" type="PointLight2D" parent="."]
+color = Color(0.862745, 0.145098, 0.0470588, 1)
+energy = 10.94
+range_z_min = -16
+range_z_max = 16
+shadow_enabled = true
+texture = ExtResource("2_68l47")
+texture_scale = 2.62

@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgt2v2ghd04gf"]
+
+[ext_resource type="Texture2D" uid="uid://dky2e6j25268m" path="res://graphics/projectiles/blue.png" id="1_5w30j"]
+[ext_resource type="Script" path="res://scenes/player/laser.gd" id="1_e15f3"]
+[ext_resource type="Texture2D" uid="uid://tl0il3vlnaac" path="res://graphics/lights/textures/circle.png" id="3_derxn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mf478"]
+radius = 3.0
+height = 40.0
+
+[node name="Laser" type="Area2D"]
+position = Vector2(0, -3)
+collision_layer = 3
+collision_mask = 12
+script = ExtResource("1_e15f3")
+
+[node name="LaserProjectile" type="Sprite2D" parent="."]
+position = Vector2(0, -30)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_5w30j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -35)
+shape = SubResource("CapsuleShape2D_mf478")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.504
+one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(1, -49)
+color = Color(0.301961, 0.945098, 0.996078, 1)
+texture = ExtResource("3_derxn")
+texture_scale = 0.2
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

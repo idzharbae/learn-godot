@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://1osj2cmywj3a"]
+
+[ext_resource type="Texture2D" uid="uid://b1jlo1oph6qfs" path="res://graphics/decals/white.png" id="1_2n36i"]
+[ext_resource type="Script" path="res://scenes/player/laser_particles.gd" id="1_u2wy2"]
+
+[sub_resource type="Gradient" id="Gradient_u8tq2"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.490196)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rcc3h"]
+gradient = SubResource("Gradient_u8tq2")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_e5sh0"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t3ukf"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 14.39
+spread = 20.225
+directional_velocity_min = 49.54
+directional_velocity_max = 146.61
+directional_velocity_curve = SubResource("CurveXYZTexture_e5sh0")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.25
+color = Color(0.305882, 0.992157, 1, 1)
+color_ramp = SubResource("GradientTexture1D_rcc3h")
+
+[node name="LaserParticles" type="Node2D"]
+script = ExtResource("1_u2wy2")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_t3ukf")
+texture = ExtResource("1_2n36i")
+lifetime = 0.5
+one_shot = true

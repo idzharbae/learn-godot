@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdmuxdamnd3xf"]
+
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_86osg"]
+[ext_resource type="Texture2D" uid="uid://d82xi62i0bok" path="res://graphics/car/main.png" id="1_hepav"]
+[ext_resource type="PackedScene" uid="uid://bfxvcaf8a5ugq" path="res://scenes/player/player.tscn" id="2_ojtbt"]
+[ext_resource type="Script" path="res://scenes/levels/Car.gd" id="2_swhyl"]
+[ext_resource type="PackedScene" uid="uid://dnr5f7gyjnsjp" path="res://scenes/doodads/bed.tscn" id="3_ogd70"]
+[ext_resource type="PackedScene" uid="uid://cilf3dnby210q" path="res://scenes/levels/box.tscn" id="6_lctna"]
+[ext_resource type="PackedScene" uid="uid://doofmdd7xh6qu" path="res://scenes/enemies/drone.tscn" id="7_40exx"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_86osg")
+
+[node name="Car" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_hepav")
+region_rect = Rect2(0, 0, 474.294, 679.688)
+script = ExtResource("2_swhyl")
+
+[node name="Player" parent="." instance=ExtResource("2_ojtbt")]
+position = Vector2(493, 413)
+
+[node name="Bed" parent="." instance=ExtResource("3_ogd70")]
+position = Vector2(793, 379)
+
+[node name="Box" parent="." instance=ExtResource("6_lctna")]
+position = Vector2(499, 576)
+
+[node name="Node2D" parent="." instance=ExtResource("7_40exx")]
+position = Vector2(-12, 0)

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp0ylgvpthfgq"]
+
+[ext_resource type="PackedScene" uid="uid://crda82nse6eqb" path="res://scenes/levels/master/outside_level.tscn" id="1_2cmvb"]
+[ext_resource type="PackedScene" uid="uid://cgh8w7euvb7r6" path="res://scenes/doodads/crate.tscn" id="2_uwnin"]
+
+[node name="Level1" instance=ExtResource("1_2cmvb")]
+
+[node name="Crate" parent="." index="7" instance=ExtResource("2_uwnin")]
+position = Vector2(494, 810)
+
+[node name="Crate2" parent="." index="8" instance=ExtResource("2_uwnin")]
+position = Vector2(147, 848)
+rotation = -1.04183
+
+[node name="Crate3" parent="." index="9" instance=ExtResource("2_uwnin")]
+position = Vector2(830, 966)
+rotation = 1.79071

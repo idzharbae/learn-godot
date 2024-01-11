@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctro1i7moafbf"]
+
+[ext_resource type="Script" path="res://scenes/items/powerup.gd" id="1_enp4h"]
+[ext_resource type="Texture2D" uid="uid://dfvsyc7aua54t" path="res://graphics/items/orb2.png" id="1_tbk67"]
+[ext_resource type="Texture2D" uid="uid://dcnujspjtr7yl" path="res://graphics/lights/textures/circle_scaled.png" id="2_ia4b6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7hhas"]
+radius = 24.0
+
+[sub_resource type="Animation" id="Animation_bkndh"]
+resource_name = "spin"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjh3l"]
+_data = {
+"spin": SubResource("Animation_bkndh")
+}
+
+[node name="Powerup" type="Area2D"]
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("1_enp4h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7hhas")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 6.28319
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_tbk67")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 1.99
+texture = ExtResource("2_ia4b6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bjh3l")
+}
+autoplay = "spin"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
