@@ -63,3 +63,7 @@ func _on_laser_cooldown_timeout():
 
 func _on_grenade_cooldown_timeout():
 	grenade_is_coolingdown = false
+
+func on_hit(damage: int, source: String):
+	if source == "enemy":
+		Globals.player_hp -= damage

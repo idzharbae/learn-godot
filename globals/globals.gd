@@ -21,7 +21,7 @@ var grenade_amount = 5:
 
 var player_max_hp = 100
 signal player_hp_updated
-var player_hp: int = 50:
+var player_hp: int = 100:
 	get:
 		return player_hp
 	set(value):
