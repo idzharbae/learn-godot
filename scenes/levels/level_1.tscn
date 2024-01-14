@@ -2,14 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://crda82nse6eqb" path="res://scenes/levels/master/outside_level.tscn" id="1_2cmvb"]
 [ext_resource type="PackedScene" uid="uid://cgh8w7euvb7r6" path="res://scenes/doodads/crate.tscn" id="2_uwnin"]
-[ext_resource type="PackedScene" uid="uid://duprfc01fn874" path="res://scenes/enemies/bug.tscn" id="3_h2f0w"]
-[ext_resource type="PackedScene" uid="uid://cvdfd0cyvjws8" path="res://scenes/enemies/car.tscn" id="4_ifa2t"]
+[ext_resource type="PackedScene" uid="uid://dmpfh740lnorr" path="res://scenes/enemies/hunter.tscn" id="5_1wrrf"]
 
 [sub_resource type="Curve2D" id="Curve2D_vuri0"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -351, 1162, 0, 0, 0, 0, 525, 1176, 0, 0, 0, 0, 1289, 1171, 0, 0, 0, 0, 1534, 1108, 0, 0, 0, 0, 1575, 356, 0, 0, 0, 0, 1415, 265, 0, 0, 0, 0, 244, 465, 0, 0, 0, 0, -545, 370, 0, 0, 0, 0, -643, 810, 0, 0, 0, 0, -592, 1036, 0, 0, 0, 0, -351, 1162)
 }
 point_count = 11
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ugygf"]
+vertices = PackedVector2Array(802, 865, 786, 892, 590, 857, 589, 745, 401, 734, 402, 854, 240, 791, 141, 748, 1343, 261, 1751, 269, 1686, 788, 951, 760, 1342, 261, -802, 610, -806, 136, 896, 902, 1688, 979, 1662, 1170, 856, 1074, 760, 1056, -799, 1234, 139, 954, 1753, 1217, 1750, 1234, 883, 880, 43, 903)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11, 12), PackedInt32Array(13, 14, 12, 11, 3, 4), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(2, 1, 19, 20, 21), PackedInt32Array(17, 22, 23, 20, 18), PackedInt32Array(19, 18, 20), PackedInt32Array(21, 6, 5), PackedInt32Array(11, 24, 0, 3), PackedInt32Array(13, 4, 7), PackedInt32Array(13, 7, 25, 20), PackedInt32Array(20, 25, 21), PackedInt32Array(2, 21, 5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(145, 761, 57, 899, 135, 941, 225, 796, 412, 844, 580, 847, 796, 895, 771, 1048, 848, 1062, 889, 892, 1700, 970, 1673, 1164, 1765, 1212, 1758, 1244, -809, 1244, -812, 610), PackedVector2Array(155, 709, -817, 126, -812, 610, 145, 761), PackedVector2Array(145, 761, 225, 796, 259, 731, 155, 709), PackedVector2Array(259, 731, 225, 796, 412, 844, 411, 745), PackedVector2Array(580, 847, 579, 754, 844, 764, 807, 876, 796, 895), PackedVector2Array(889, 892, 807, 876, 844, 764, 957, 770), PackedVector2Array(-817, 126, 1343, 251, 579, 754, 411, 745, 259, 731, 155, 709), PackedVector2Array(579, 754, 844, 764, 957, 770, 1695, 799, 1763, 260, 1343, 251)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="Level1" instance=ExtResource("1_2cmvb")]
 
@@ -24,12 +29,11 @@ rotation = -1.04183
 position = Vector2(830, 966)
 rotation = 1.79071
 
-[node name="Bug" parent="." index="11" instance=ExtResource("3_h2f0w")]
-position = Vector2(1071, 969)
-
-[node name="CarPath" type="Path2D" parent="." index="12"]
+[node name="CarPath" type="Path2D" parent="." index="11"]
 curve = SubResource("Curve2D_vuri0")
 
-[node name="Car" parent="CarPath" index="0" instance=ExtResource("4_ifa2t")]
-position = Vector2(-351, 1162)
-rotation = 0.0159804
+[node name="Hunter" parent="." index="12" instance=ExtResource("5_1wrrf")]
+position = Vector2(-73, 751)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="13"]
+navigation_polygon = SubResource("NavigationPolygon_ugygf")

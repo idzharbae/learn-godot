@@ -163,7 +163,6 @@ texture = ExtResource("5_ooi4g")
 [node name="PointLight2D" type="PointLight2D" parent="Turret/TurretImage/Gunfire2"]
 visible = false
 position = Vector2(-6.24998, 68.7501)
-scale = Vector2(1, 1)
 texture = ExtResource("4_kdpii")
 
 [node name="RayCast2D2" type="RayCast2D" parent="Turret"]
