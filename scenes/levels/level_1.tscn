@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dp0ylgvpthfgq"]
+[gd_scene load_steps=7 format=3 uid="uid://dp0ylgvpthfgq"]
 
 [ext_resource type="PackedScene" uid="uid://crda82nse6eqb" path="res://scenes/levels/master/outside_level.tscn" id="1_2cmvb"]
 [ext_resource type="PackedScene" uid="uid://cgh8w7euvb7r6" path="res://scenes/doodads/crate.tscn" id="2_uwnin"]
+[ext_resource type="PackedScene" uid="uid://cvdfd0cyvjws8" path="res://scenes/enemies/car.tscn" id="3_uvupd"]
 [ext_resource type="PackedScene" uid="uid://dmpfh740lnorr" path="res://scenes/enemies/hunter.tscn" id="5_1wrrf"]
 
 [sub_resource type="Curve2D" id="Curve2D_vuri0"]
@@ -31,6 +32,10 @@ rotation = 1.79071
 
 [node name="CarPath" type="Path2D" parent="." index="11"]
 curve = SubResource("Curve2D_vuri0")
+
+[node name="Car" parent="CarPath" index="0" instance=ExtResource("3_uvupd")]
+position = Vector2(-351, 1162)
+rotation = 0.0159804
 
 [node name="Hunter" parent="." index="12" instance=ExtResource("5_1wrrf")]
 position = Vector2(-73, 751)

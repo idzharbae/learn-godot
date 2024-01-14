@@ -77,11 +77,11 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
 shape = SubResource("CircleShape2D_krgg1")
 
-[node name="DroneHP" type="TextureProgressBar" parent="."]
+[node name="HPBar" type="TextureProgressBar" parent="."]
 offset_left = -48.0
-offset_top = -96.0
+offset_top = -97.0
 offset_right = 252.0
-offset_bottom = -66.0
+offset_bottom = -67.0
 scale = Vector2(0.33, 0.33)
 value = 100.0
 texture_under = ExtResource("3_hl01g")

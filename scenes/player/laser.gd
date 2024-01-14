@@ -1,7 +1,7 @@
 extends Node2D
 
 const projectile_speed = 1200
-var damage: int = 3
+var damage: int = 30
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

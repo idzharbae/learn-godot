@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx0wwjpp2l0g6"]
+
+[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_ao55r"]
+[ext_resource type="Texture2D" uid="uid://eafgy3q7w0hj" path="res://graphics/header.jpg" id="2_w4eab"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_ao55r")
+
+[node name="MainMenuBg" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_w4eab")
+
+[node name="MenuButtons" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -277.0
+offset_top = -161.0
+offset_right = 278.0
+offset_bottom = 171.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="MenuButtons"]
+layout_mode = 2
+text = "Play"
+
+[node name="Exit" type="Button" parent="MenuButtons"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="MenuButtons/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MenuButtons/Exit" to="." method="_on_exit_pressed"]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://b45vc0exlm764"]
+
+[ext_resource type="Texture2D" uid="uid://dekubybahe4ak" path="res://graphics/enemies/drone.png" id="1_eqc66"]
+[ext_resource type="Texture2D" uid="uid://8h425byogjn3" path="res://graphics/ui/progress_bar/bg.png" id="2_lfewc"]
+[ext_resource type="Texture2D" uid="uid://3rck3pmeqe1v" path="res://graphics/ui/progress_bar/over.png" id="3_j3d5x"]
+[ext_resource type="Texture2D" uid="uid://cndydy1hgekb3" path="res://graphics/ui/progress_bar/progress.png" id="4_cfahj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ul7rp"]
+radius = 32.1403
+
+[node name="BaseEnemy" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_eqc66")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ul7rp")
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+offset_left = -46.0
+offset_top = -51.0
+offset_right = 254.0
+offset_bottom = -21.0
+scale = Vector2(0.33, 0.33)
+value = 100.0
+texture_under = ExtResource("2_lfewc")
+texture_over = ExtResource("3_j3d5x")
+texture_progress = ExtResource("4_cfahj")
+metadata/_edit_use_anchors_ = true

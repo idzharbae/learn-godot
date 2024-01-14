@@ -12,7 +12,7 @@ func _ready():
 	hitpoints = 100
 	var direction = Vector2.ZERO
 	velocity = Vector2.ZERO
-	HPBar = $DroneHP
+	HPBar = $HPBar
 	HPBar.max_value = hitpoints
 	HPBar.value = hitpoints
 

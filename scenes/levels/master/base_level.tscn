@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsm04gn2ud5pi"]
+
+[ext_resource type="Script" path="res://scenes/levels/master/base_level.gd" id="1_jlgr1"]
+[ext_resource type="PackedScene" uid="uid://ctybs2bgti608" path="res://scenes/ui/in_game_ui.tscn" id="2_kf5r7"]
+
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource("1_jlgr1")
+
+[node name="InGameUI" parent="." instance=ExtResource("2_kf5r7")]

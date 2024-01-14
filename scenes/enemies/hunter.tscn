@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dmpfh740lnorr"]
+[gd_scene load_steps=22 format=3 uid="uid://dmpfh740lnorr"]
 
 [ext_resource type="Script" path="res://scenes/enemies/hunter.gd" id="1_k1urm"]
 [ext_resource type="Texture2D" uid="uid://ct1ysjwdrtnov" path="res://graphics/enemies/hunter/parts/torso.png" id="2_y603d"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://ckbu617ejvnwx" path="res://graphics/enemies/hunter/parts/leg_back_inner.png" id="6_4spcp"]
 [ext_resource type="Texture2D" uid="uid://cxtxmk3xq0ndg" path="res://graphics/enemies/hunter/parts/claw.png" id="6_wxnpd"]
 [ext_resource type="Texture2D" uid="uid://b7fe0ku5s37dd" path="res://graphics/enemies/hunter/parts/leg_back_outer.png" id="7_grxb5"]
+[ext_resource type="Texture2D" uid="uid://8h425byogjn3" path="res://graphics/ui/progress_bar/bg.png" id="9_b66t3"]
+[ext_resource type="Texture2D" uid="uid://3rck3pmeqe1v" path="res://graphics/ui/progress_bar/over.png" id="10_flwgd"]
+[ext_resource type="Texture2D" uid="uid://cndydy1hgekb3" path="res://graphics/ui/progress_bar/progress.png" id="11_g7u8o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b7xu0"]
 radius = 459.01
@@ -57,6 +60,9 @@ modifications/3 = SubResource("SkeletonModification2DTwoBoneIK_bmxhw")
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l0xas"]
 radius = 17.0
 height = 172.0
+
+[sub_resource type="Animation" id="Animation_v2n7n"]
+resource_name = "attack"
 
 [sub_resource type="Animation" id="Animation_c73gg"]
 resource_name = "walk"
@@ -110,9 +116,6 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(-189, 132), Vector2(-205, 93), Vector2(-172, 151), Vector2(-205, 93), Vector2(-189, 132)]
 }
-
-[sub_resource type="Animation" id="Animation_v2n7n"]
-resource_name = "attack"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qgi0b"]
 _data = {
@@ -168,7 +171,6 @@ scale = Vector2(0.999995, 0.999995)
 position = Vector2(26.0001, -101.001)
 rotation = 1.04369
 scale = Vector2(0.999985, 0.999985)
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Body/Skeleton2D/Torso/FrontRightLeg"]
 position = Vector2(27.7237, -39.5027)
@@ -181,7 +183,6 @@ scale = Vector2(0.999959, 0.999959)
 auto_calculate_length_and_angle = false
 length = 122.072
 bone_angle = -69.517
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Body/Skeleton2D/Torso/FrontRightLeg/FrontRightClaw"]
 position = Vector2(35.8398, -36.2446)
@@ -194,7 +195,6 @@ texture = ExtResource("2_y603d")
 position = Vector2(-44.0002, -103.001)
 rotation = -1.02609
 scale = Vector2(0.999959, 0.999959)
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Body/Skeleton2D/Torso/FrontLeftLeg"]
 position = Vector2(-28.0001, -30.0001)
@@ -208,7 +208,6 @@ scale = Vector2(0.999957, 0.999957)
 auto_calculate_length_and_angle = false
 length = 107.717
 bone_angle = -119.172
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Body/Skeleton2D/Torso/FrontLeftLeg/FrontLeftClaw"]
 position = Vector2(-40.1413, -32.4783)
@@ -236,7 +235,6 @@ texture = ExtResource("6_wxnpd")
 
 [node name="BackRightLeg" type="Bone2D" parent="Body/Skeleton2D/Torso"]
 position = Vector2(24.0001, -57.0003)
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Body/Skeleton2D/Torso/BackRightLeg"]
 position = Vector2(19.0001, 25.0001)
@@ -247,7 +245,6 @@ position = Vector2(41.0002, 67.0003)
 auto_calculate_length_and_angle = false
 length = 40.77
 bone_angle = -20.72
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Body/Skeleton2D/Torso/BackRightLeg/BackRightClaw"]
 position = Vector2(32.0002, 44.0002)
@@ -255,7 +252,6 @@ texture = ExtResource("7_grxb5")
 
 [node name="BackLeftLeg" type="Bone2D" parent="Body/Skeleton2D/Torso"]
 position = Vector2(-37.0002, -50.0002)
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Body/Skeleton2D/Torso/BackLeftLeg"]
 position = Vector2(-21.0001, 21.0001)
@@ -267,7 +263,6 @@ position = Vector2(-44.0002, 62.0003)
 auto_calculate_length_and_angle = false
 length = 33.843
 bone_angle = -159.07
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Body/Skeleton2D/Torso/BackLeftLeg/BackLeftClaw"]
 position = Vector2(-33.0002, 43.0002)
@@ -283,6 +278,18 @@ shape = SubResource("CapsuleShape2D_l0xas")
 libraries = {
 "": SubResource("AnimationLibrary_qgi0b")
 }
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+offset_left = -64.0
+offset_top = -96.0
+offset_right = 236.0
+offset_bottom = -66.0
+scale = Vector2(0.33, 0.33)
+value = 100.0
+texture_under = ExtResource("9_b66t3")
+texture_over = ExtResource("10_flwgd")
+texture_progress = ExtResource("11_g7u8o")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="NoticeArea" to="." method="_on_notice_area_body_entered"]
 [connection signal="body_exited" from="NoticeArea" to="." method="_on_notice_area_body_exited"]

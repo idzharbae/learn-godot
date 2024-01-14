@@ -4,7 +4,9 @@ extends PathFollow2D
 var target: CharacterBody2D
 @onready var line1 = $Turret/RayCast2D/Line2D
 @onready var line2 = $Turret/RayCast2D2/Line2D
+@onready var HPBar = $HPBar
 var damage = 20
+var hitpoints = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,12 +19,10 @@ func _process(delta):
 	if target:
 		$Turret.look_at(target.global_position)
 
-
 func _on_shoot_range_body_entered(body):
 	if body.name == "Player":
 		target = body
 		$AnimationPlayer.play("LaserBeam")
-
 
 func _on_shoot_range_body_exited(body):
 	if body == target:
@@ -31,8 +31,6 @@ func _on_shoot_range_body_exited(body):
 
 func damage_target():
 	if target:
-		target.on_hit(damage, "enemy")
-		
 		$Turret/TurretImage/Gunfire1/PointLight2D.visible = true
 		$Turret/TurretImage/Gunfire2/PointLight2D.visible = true
 		
@@ -42,3 +40,6 @@ func damage_target():
 		tween.tween_property($Turret/TurretImage/Gunfire2, "modulate:a", 0, 0.5).from(1)
 		tween.tween_property($Turret/TurretImage/Gunfire1/PointLight2D, "energy", 0, 0.5).from(2)
 		tween.tween_property($Turret/TurretImage/Gunfire2/PointLight2D, "energy", 0, 0.5).from(2)
+		
+		target.on_hit(damage, "enemy")
+

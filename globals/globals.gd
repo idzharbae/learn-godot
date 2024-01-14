@@ -1,7 +1,7 @@
 extends Node
 
 
-var max_laser_amount = 30
+var max_laser_amount = 300
 signal laser_updated
 var laser_amount = 30:
 	get:

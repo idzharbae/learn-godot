@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvdfd0cyvjws8"]
+[gd_scene load_steps=15 format=3 uid="uid://cvdfd0cyvjws8"]
 
 [ext_resource type="Texture2D" uid="uid://d82xi62i0bok" path="res://graphics/car/main.png" id="1_e7kmb"]
 [ext_resource type="Script" path="res://scenes/enemies/car.gd" id="1_h4jeu"]
 [ext_resource type="Texture2D" uid="uid://b6g3mt07vdutd" path="res://graphics/car/turret.png" id="2_01g6u"]
+[ext_resource type="Script" path="res://scenes/enemies/CarBody.gd" id="3_ptc88"]
 [ext_resource type="Texture2D" uid="uid://dcnujspjtr7yl" path="res://graphics/lights/textures/circle_scaled.png" id="4_kdpii"]
 [ext_resource type="Texture2D" uid="uid://b2el21u7iwrix" path="res://graphics/explosions/gun.png" id="5_ooi4g"]
+[ext_resource type="Texture2D" uid="uid://8h425byogjn3" path="res://graphics/ui/progress_bar/bg.png" id="6_j617r"]
+[ext_resource type="Texture2D" uid="uid://3rck3pmeqe1v" path="res://graphics/ui/progress_bar/over.png" id="7_glb6o"]
+[ext_resource type="Texture2D" uid="uid://cndydy1hgekb3" path="res://graphics/ui/progress_bar/progress.png" id="8_omxmf"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nejtm"]
 polygon = PackedVector2Array(92, -41, 71, -32, 72, -26, 92, -20, 64, -22, 65, -35)
@@ -119,11 +123,24 @@ occluder_light_mask = 2
 [node name="CarBody" type="CharacterBody2D" parent="."]
 collision_layer = 136
 collision_mask = 14
+script = ExtResource("3_ptc88")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CarBody"]
 polygon = PackedVector2Array(54, -68, 4, -69, 2, -50, -21, -53, -34, -45, -39, -70, -89, -70, -91, -44, -83, -42, -84, -32, -93, -33, -95, -21, -120, -15, -119, 11, -110, 20, -92, 20, -91, 32, -84, 33, -86, 42, -90, 43, -92, 66, -56, 71, -40, 66, -36, 40, -21, 52, 1, 49, 1, 66, 42, 67, 53, 63, 61, 63, 69, 48, 71, 35, 69, -46)
 
-[node name="CarImage" type="Sprite2D" parent="."]
+[node name="HPBar" type="TextureProgressBar" parent="CarBody"]
+offset_left = -64.0
+offset_top = -96.0
+offset_right = 236.0
+offset_bottom = -66.0
+scale = Vector2(0.33, 0.33)
+value = 100.0
+texture_under = ExtResource("6_j617r")
+texture_over = ExtResource("7_glb6o")
+texture_progress = ExtResource("8_omxmf")
+metadata/_edit_use_anchors_ = true
+
+[node name="CarImage" type="Sprite2D" parent="CarBody"]
 rotation = 1.5708
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_e7kmb")
