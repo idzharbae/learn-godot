@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bo5r67rltunbx"
+path="res://.godot/imported/New Jeans - New Jeans.mp3-01b712193a102a44a2102015a9a4d95d.mp3str"
+
+[deps]
+
+source_file="res://audio/New Jeans - New Jeans.mp3"
+dest_files=["res://.godot/imported/New Jeans - New Jeans.mp3-01b712193a102a44a2102015a9a4d95d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

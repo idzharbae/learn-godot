@@ -1,6 +1,13 @@
 extends Node
 
 
+var player_hit_sound: AudioStreamPlayer2D
+
+func _ready():
+	player_hit_sound = AudioStreamPlayer2D.new()
+	player_hit_sound.stream = load("res://audio/solid_impact.ogg")
+	add_child(player_hit_sound)
+
 var max_laser_amount = 300
 signal laser_updated
 var laser_amount = 30:
@@ -25,6 +32,9 @@ var player_hp: int = 100:
 	get:
 		return player_hp
 	set(value):
+		if value < player_hp:
+			player_hit_sound.play()
+		
 		player_hp = max(0, min(value, player_max_hp))
 		player_hp_updated.emit()
 		if player_hp <= 0:

@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bn7qp2anyn4x0"]
+[gd_scene load_steps=12 format=3 uid="uid://bn7qp2anyn4x0"]
 
 [ext_resource type="Texture2D" uid="uid://w2gwwerlu5wd" path="res://graphics/projectiles/grenade.png" id="1_pmhck"]
+[ext_resource type="Script" path="res://scenes/player/grenade.gd" id="1_v0qk7"]
 [ext_resource type="Texture2D" uid="uid://cfmn4temg35c3" path="res://graphics/explosions/explosion_3.png" id="2_vhvy2"]
 [ext_resource type="Texture2D" uid="uid://tl0il3vlnaac" path="res://graphics/lights/textures/circle.png" id="3_u70ob"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m7o1n"]
-bounce = 0.4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yop7i"]
 radius = 19.845
@@ -102,6 +102,20 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.101961)]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"damage_targets"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_wafts"]
 resource_name = "explosion_trigger"
@@ -140,13 +154,18 @@ _data = {
 "explosion_trigger": SubResource("Animation_wafts")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rcdid"]
+radius = 70.0071
+
 [node name="Grenade" type="RigidBody2D"]
 z_index = 2
 collision_layer = 2
 collision_mask = 12
 physics_material_override = SubResource("PhysicsMaterial_m7o1n")
 gravity_scale = 0.0
-linear_damp = 2.278
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_v0qk7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -174,3 +193,14 @@ energy = 0.0
 shadow_enabled = true
 texture = ExtResource("3_u70ob")
 texture_scale = 0.33
+
+[node name="ExplosionRadius" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionRadius"]
+shape = SubResource("CircleShape2D_rcdid")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="ExplosionRadius" to="." method="_on_explosion_radius_body_entered"]
+[connection signal="body_exited" from="ExplosionRadius" to="." method="_on_explosion_radius_body_exited"]

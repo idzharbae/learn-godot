@@ -27,6 +27,7 @@ func _process(delta):
 	
 	if Input.is_action_pressed("primary action") and not laser_is_coolingdown and Globals.laser_amount > 0:
 		Globals.laser_amount -= 1
+		($AudioStreamPlayer2D as AudioStreamPlayer2D).play()
 		#if Globals.laser_amount == 0:
 			#Globals.laser_amount = Globals.max_laser_amount
 		
@@ -40,7 +41,6 @@ func _process(delta):
 		$"..".add_child(laser)
 		laser.position = $LaserPosition.global_position
 		laser.rotation_degrees = rotation_degrees + randi_range(-75, 75) / 10.0
-		$".."/InGameUI.update_laser_count()
 		
 	
 	if Input.is_action_just_pressed("secondary action") and not grenade_is_coolingdown and Globals.grenade_amount > 0:
@@ -55,7 +55,6 @@ func _process(delta):
 		grenade.position = $LaserPosition.global_position
 		var player_direction = (get_global_mouse_position() - position).normalized()
 		grenade.linear_velocity = 600 * player_direction
-		$".."/InGameUI.update_grenade_count()
 
 
 func _on_laser_cooldown_timeout():

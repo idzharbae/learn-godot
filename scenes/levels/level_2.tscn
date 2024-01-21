@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://dojsxvgqwspcl"]
+[gd_scene load_steps=10 format=3 uid="uid://dmeawhv1lamyu"]
 
 [ext_resource type="TileSet" uid="uid://btlc0kl06whcj" path="res://scenes/tilesets/house1.tres" id="1_h0eip"]
-[ext_resource type="Script" path="res://scenes/levels/level_2.gd" id="1_p2iy0"]
 [ext_resource type="PackedScene" uid="uid://bfxvcaf8a5ugq" path="res://scenes/player/player.tscn" id="2_qkvw3"]
 [ext_resource type="PackedScene" uid="uid://cngn3n2omqgus" path="res://scenes/doodads/wall_lamp.tscn" id="3_4lcjc"]
 [ext_resource type="PackedScene" uid="uid://behcpbycdixoj" path="res://scenes/doodads/simple_light.tscn" id="4_1wcad"]
@@ -9,11 +8,29 @@
 [ext_resource type="PackedScene" uid="uid://doofmdd7xh6qu" path="res://scenes/enemies/drone.tscn" id="6_r862r"]
 [ext_resource type="PackedScene" uid="uid://ctybs2bgti608" path="res://scenes/ui/in_game_ui.tscn" id="7_bf43n"]
 
+[sub_resource type="GDScript" id="GDScript_nclkb"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+func _on_area_2d_body_entered(body):
+	create_tween().tween_property($Player, \"speed\", 0, 0.5)
+	LevelTransition.change_scene(\"res://scenes/levels/level_1.tscn\")
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pknsc"]
 size = Vector2(133, 39)
 
 [node name="level_2" type="Node2D"]
-script = ExtResource("1_p2iy0")
+script = SubResource("GDScript_nclkb")
 
 [node name="InGameUI" parent="." instance=ExtResource("7_bf43n")]
 

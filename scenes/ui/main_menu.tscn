@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bx0wwjpp2l0g6"]
+[gd_scene load_steps=4 format=3 uid="uid://bx0wwjpp2l0g6"]
 
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_ao55r"]
 [ext_resource type="Texture2D" uid="uid://eafgy3q7w0hj" path="res://graphics/header.jpg" id="2_w4eab"]
+[ext_resource type="AudioStream" uid="uid://bo5r67rltunbx" path="res://audio/New Jeans - New Jeans.mp3" id="3_vv71u"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_ao55r")
@@ -35,6 +36,11 @@ text = "Play"
 [node name="Exit" type="Button" parent="MenuButtons"]
 layout_mode = 2
 text = "Exit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vv71u")
+volume_db = -13.907
+autoplay = true
 
 [connection signal="pressed" from="MenuButtons/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MenuButtons/Exit" to="." method="_on_exit_pressed"]

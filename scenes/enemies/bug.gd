@@ -1,31 +1,34 @@
-extends CharacterBody2D
+extends BaseEnemy
 
-var hitpoints: int
-var direction: Vector2
 var target: CharacterBody2D
-var HPBar: TextureProgressBar
 var player_near = false
+var animated_body: AnimatedSprite2D
 
 func _ready():
-	hitpoints = 25
+	original_position = global_position
+	animated_body = $Body/AnimatedSprite2D
+	body_image = animated_body
+	body_collision = $Body
 	var direction = Vector2.ZERO
 	velocity = Vector2.ZERO
-	HPBar = $BugHP
-	HPBar.max_value = hitpoints
-	HPBar.value = hitpoints
+	HPBar = $HPBar
+	init_hp(50)
+	speed = 150
 
-func _process(delta):
-	if player_near:
-		return
-	
+func _physics_process(_delta):
 	if target:
-		direction = (target.position - position).normalized()
-		look_at(target.position)
-		if not $AnimatedSprite2D.is_playing():
-			$AnimatedSprite2D.play("walk")
-	
-	velocity = direction * 200
-	move_and_slide()
+		if animated_body.animation == "attack" and animated_body.is_playing():
+			return
+		if not animated_body.is_playing():
+			animated_body.play("walk")
+		chase_path_find(target, $NavigationAgent2D)
+	elif position.distance_to(original_position) > 10:
+		if not animated_body.is_playing():
+			animated_body.play("walk")
+		backoff_from_chase($NavigationAgent2D)
+	else:
+		get_tree().create_tween().tween_property($".", "rotation_degrees", 0, 0.5)
+		animated_body.stop()
 
 func on_hit(damage: int, source: String):
 	if source != "player":
@@ -36,10 +39,10 @@ func on_hit(damage: int, source: String):
 	HPBar.value = hitpoints
 	if hitpoints < 1:
 		hitpoints = 0
-		$AnimatedSprite2D.modulate = Color(3,3,3,1)
+		animated_body.modulate = Color(3,3,3,1)
 		tween.set_loops(4)
-		tween.tween_property($AnimatedSprite2D, "modulate:a", 0.33, 0.25).set_trans(Tween.TRANS_BOUNCE)
-		tween.tween_property($AnimatedSprite2D, "modulate:a", 1, 0.25).set_trans(Tween.TRANS_BOUNCE)
+		tween.tween_property(animated_body, "modulate:a", 0.33, 0.25).set_trans(Tween.TRANS_BOUNCE)
+		tween.tween_property(animated_body, "modulate:a", 1, 0.25).set_trans(Tween.TRANS_BOUNCE)
 		tween.tween_callback(blocking_bleed)
 		tween.tween_callback(queue_free)
 	else:
@@ -55,16 +58,15 @@ func _on_sight_body_entered(body):
 
 func _on_sight_body_exited(body):
 	if body as CharacterBody2D == target:
-		$AnimatedSprite2D.stop()
+		$NavigationAgent2D.target_position = original_position
 		target = null
-		direction = Vector2.ZERO
-		get_tree().create_tween().tween_property($".", "rotation_degrees", 0, 0.5)
+
 
 
 func _on_attack_range_body_entered(body):
 	if not player_near:
 		player_near = true
-		$AnimatedSprite2D.play("attack")
+		animated_body.play("attack")
 
 
 func _on_attack_range_body_exited(body):
@@ -78,4 +80,9 @@ func _on_animated_sprite_2d_animation_finished():
 
 func _on_attack_timer_timeout():
 	if player_near:
-		$AnimatedSprite2D.play("attack")
+		animated_body.play("attack")
+
+
+func _on_target_path_finding_update_timeout():
+	if target:
+		$NavigationAgent2D.target_position = target.global_position

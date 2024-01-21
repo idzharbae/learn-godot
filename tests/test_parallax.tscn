@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://biml8b6hxxpxy"]
+
+[ext_resource type="Texture2D" uid="uid://ctsn4jdswbqo2" path="res://tests/parallax_bg/Gradient (z -6).png" id="1_5hm8y"]
+[ext_resource type="Texture2D" uid="uid://bkw5u0ihuuobx" path="res://tests/parallax_bg/middleground (z 0).png" id="2_2q7dd"]
+[ext_resource type="Texture2D" uid="uid://bagb0v1kf5bjx" path="res://tests/parallax_bg/mtn (z -4).png" id="2_whcrq"]
+[ext_resource type="PackedScene" uid="uid://ch7eph28ib41w" path="res://tests/parallax_player.tscn" id="3_0io3s"]
+[ext_resource type="Texture2D" uid="uid://dmht1y5f1vk1c" path="res://tests/parallax_bg/sky (z -3).png" id="3_6lanq"]
+
+[node name="TestParallax" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Sky"]
+position = Vector2(0, 260)
+texture = ExtResource("1_5hm8y")
+
+[node name="Mountain" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.25, 0.25)
+motion_mirroring = Vector2(4000, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Mountain"]
+position = Vector2(-1701, 383)
+texture = ExtResource("2_whcrq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/Mountain"]
+position = Vector2(456, 403)
+texture = ExtResource("2_whcrq")
+
+[node name="FarForest" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(5000, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/FarForest"]
+position = Vector2(-983, 448)
+texture = ExtResource("3_6lanq")
+
+[node name="Forest" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(-2449, 42)
+motion_mirroring = Vector2(3500, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Forest"]
+position = Vector2(1228, 426)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_2q7dd")
+
+[node name="ParallaxPlayer" parent="." instance=ExtResource("3_0io3s")]
+position = Vector2(629, 694)
+scale = Vector2(3, 3)

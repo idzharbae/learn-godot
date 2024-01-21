@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://ch7eph28ib41w"]
+
+[ext_resource type="Texture2D" uid="uid://bgrepcrnd7aam" path="res://tests/parallax_char/Woodcutter_walk.png" id="1_vvkxw"]
+[ext_resource type="Script" path="res://tests/parallax_player.gd" id="1_xvvyf"]
+
+[sub_resource type="Animation" id="Animation_3doai"]
+resource_name = "idle"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_pywn8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_5xx4r"]
+resource_name = "walk"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mk5pq"]
+_data = {
+"RESET": SubResource("Animation_pywn8"),
+"idle": SubResource("Animation_3doai"),
+"walk": SubResource("Animation_5xx4r")
+}
+
+[node name="ParallaxPlayer" type="CharacterBody2D"]
+script = ExtResource("1_xvvyf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-1, -17, -6, -13, -5, -9, -7, 7, -7, 16, -1, 17, 5, 17, 5, 7, 5, -7, 4, -11, 3, -18)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7, -8)
+texture = ExtResource("1_vvkxw")
+hframes = 6
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mk5pq")
+}
+autoplay = "walk"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -100)

@@ -4,9 +4,11 @@ var powerup_types = ['ammo', 'grenade', 'health']
 var type = powerup_types[randi_range(0, len(powerup_types) - 1)]
 var movement_distance = randi_range(50, 150)
 var direction: Vector2
+var audio: AudioStreamPlayer2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	audio = $AudioStreamPlayer2D
 	match type:
 		'health':
 			$Sprite2D.modulate = Color(1, 0.5, 0.5, 1)
@@ -39,4 +41,8 @@ func _on_body_entered(body):
 		'ammo':
 			Globals.laser_amount += 10
 	
+	$Sprite2D.visible = false
+	$CollisionShape2D.disabled = true
+	audio.play()
+	await audio.finished
 	queue_free()
